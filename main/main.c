@@ -41,33 +41,52 @@ esp_err_t drv8305_init_desc_spi(drv8305_t *dev, spi_host_device_t host, uint32_t
     return spi_bus_add_device(host, &dev->spi_cfg, &dev->spi_dev);
 }
 
-static esp_err_t write_reg_8(drv8305_t *dev, uint8_t reg, uint8_t val)
+#define BIT_ORDER 1
+
+#if BIT_ORDER
+    #define TX_DEF() uint8_t tx[] = { (out & 0xFF), (out >> 8 & 0xFF)}
+#else
+    #define TX_DEF() uint8_t tx[] = { (out >> 8 & 0xFF), (out & 0xFF) }
+#endif
+
+static esp_err_t write_reg(drv8305_t *dev, uint8_t reg, uint8_t val)
 {
     spi_transaction_t t;
     memset(&t, 0, sizeof(spi_transaction_t));
 
-    uint8_t tx[] = { reg | 0x80, val };
+    uint16_t out = 0;
+    out |= (reg & 0x0F) << 11;
+    out |= (val & 0x7FF);
+
+    TX_DEF();
 
     t.tx_buffer = tx;
-    t.length = sizeof(tx) * 8;
+    t.length = 16;
 
     return spi_device_transmit(dev->spi_dev, &t);
 }
 
-static esp_err_t read_reg_8(drv8305_t *dev, uint8_t reg, uint8_t *val)
+static esp_err_t read_reg(drv8305_t *dev, uint8_t reg, uint16_t *val)
 {
     spi_transaction_t t;
     memset(&t, 0, sizeof(spi_transaction_t));
 
-    uint8_t tx[] = { reg, 0 };
+    uint16_t out = 0;
+    out |= (1 << 15);
+    out |= (reg & 0x0F) << 11;
+    out |= 0x807F;
+
+    TX_DEF();
+
     uint8_t rx[sizeof(tx)];
 
     t.tx_buffer = tx;
     t.rx_buffer = rx;
-    t.length = sizeof(tx) * 8;
+    t.length = 16;
+    
     CHECK(spi_device_transmit(dev->spi_dev, &t));
 
-    *val = rx[1];
+    *val = (rx[0] << 8 ) | rx[1];
 
     return ESP_OK;
 }
@@ -91,6 +110,7 @@ void app_main()
     gpio_set_direction(enGate, GPIO_MODE_OUTPUT);
     gpio_set_level(enGate, 0);
     gpio_set_level(CS_PIN, 1);
+
     // pinMode(cs, OUTPUT);
     // digitalWrite(cs, HIGH);
     
@@ -101,19 +121,16 @@ void app_main()
     ESP_LOGI(TAG, "DRV8305 INIT");
   
     // init drv8305
-    uint8_t val;
+    uint16_t val;
     gpio_set_level(CS_PIN, 0);
-    write_reg_8(&dev, 0xA, 0x3);
-    read_reg_8(&dev, 0xA, &val);
-    ESP_LOGI(TAG, "init value1: %x", val);
+    write_reg(&dev, 0xA, 0x3);
+    read_reg(&dev, 0xA, &val);
+    ESP_LOGI(TAG, "init value1: %d", val);
 
-    write_reg_8(&dev, 0x6, 0x8);
-    read_reg_8(&dev, 0x6, &val);
-    ESP_LOGI(TAG, "init value1: %x", val);
+    write_reg(&dev, 0x6, 0x8);
+    read_reg(&dev, 0x6, &val);
+    ESP_LOGI(TAG, "init value1: %d", val);
     gpio_set_level(CS_PIN, 1);
-
-//   byte resp1 = SPI.transfer(B00111010);
-//   byte resp2 = SPI.transfer(B10000110);  
 
     vTaskDelay(500 / portTICK_PERIOD_MS);
     ESP_LOGI(TAG, "enGate Enabled");
@@ -122,12 +139,11 @@ void app_main()
 
     gpio_set_level(CS_PIN, 0);
 
-    read_reg_8(&dev, 0x5, &val);
-    ESP_LOGI(TAG, "value1: %x", val);
-
-    read_reg_8(&dev, 0x6, &val);
-    ESP_LOGI(TAG, "value2: %x", val);
-
+    for (uint8_t i = 0x0; i != 0xF; i++)
+    {
+        read_reg(&dev, i, &val);
+        ESP_LOGI(TAG, "value %u: %u", i, val);
+    }
     gpio_set_level(CS_PIN, 1);
 
 }
