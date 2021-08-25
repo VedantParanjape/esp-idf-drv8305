@@ -7,14 +7,15 @@
 #include "driver/gpio.h"
 #include "esp_err.h"
 #include "esp_log.h"
+#include "utils.h"
 
-#define enGate 25
-#define nFault 26
+#define enGate 2
+#define nFault 4
 
 #define MISO_PIN  12
 #define MOSI_PIN  13
 #define SCLK_PIN  14
-#define CS_PIN    27
+#define CS_PIN    15
 #define drv8305_MAX_SPI_FREQ 1000000
 #define HOST HSPI_HOST
 
@@ -135,4 +136,20 @@ void app_main()
         read_reg(&dev, i, &val);
         ESP_LOGI(TAG, "value %x: %x", i, val);
     }
+    uint16_t w_val = 0b1110100011101000;             
+    // 1        --> W
+    // 1101     --> Address
+    // 000      --> RSVD
+    // 11101    --> VDS_LEVEL b'11101 - 1.892 V (Default b'11001 - 1.175 V)
+    // 000      --> VDS_MODE  Default b'000 - Latched shut down when over-current detected
+    write_reg(&dev,0xc,w_val);
+    printf("Write value 0xc: "
+            PRINTF_BINARY_PATTERN_INT16"\n",
+            PRINTF_BYTE_TO_BINARY_INT16(w_val));
+
+    read_reg(&dev, 0xc, &val);
+    printf("Read value 0xc: "
+            PRINTF_BINARY_PATTERN_INT16"\n",
+            PRINTF_BYTE_TO_BINARY_INT16(val));
+
 }
