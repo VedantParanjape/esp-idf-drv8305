@@ -64,7 +64,7 @@ void app_main()
     ESP_LOGI(TAG, "%d", temp->PVDD_OVFL);
     ESP_LOGI(TAG, "%d", temp->PVDD_UVFL);
     ESP_LOGI(TAG, "%d", temp->TEMP_FLAG4);
-    ESP_LOGI(TAG, "%d", temp->STATUS_01_RSV1);
+    ESP_LOGI(TAG, "%d", temp->STAT01_RSV);
     ESP_LOGI(TAG, "%d", temp->FAULT);
 
     for (uint8_t i = 0x01; i <= 0xC; i++)
