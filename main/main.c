@@ -41,13 +41,8 @@ esp_err_t drv8305_init_desc_spi(drv8305_t *dev, spi_host_device_t host, uint32_t
     return spi_bus_add_device(host, &dev->spi_cfg, &dev->spi_dev);
 }
 
-#define BIT_ORDER 0
 
-#if BIT_ORDER
-    #define TX_DEF() uint8_t tx[] = { (out & 0xFF), (out >> 8 & 0xFF)}
-#else
-    #define TX_DEF() uint8_t tx[] = { (out >> 8 & 0xFF), (out & 0xFF) }
-#endif
+#define TX_DEF() uint8_t tx[] = { (out >> 8 & 0xFF), (out & 0xFF) }
 
 static esp_err_t write_reg(drv8305_t *dev, uint8_t reg, uint8_t val)
 {
