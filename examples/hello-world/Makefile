@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := esp-idf-drv8305
+PROJECT_NAME := app-template
 
 include $(IDF_PATH)/make/project.mk
 
