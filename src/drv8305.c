@@ -99,3 +99,23 @@ esp_err_t drv8305_read_register(drv8305_t *dev, uint8_t register_address, uint16
     
     return err;
 }
+
+esp_err_t drv8305_read_status_01_register(drv8305_t *dev, drv8305_status_01_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_STATUS_01_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_status_02_register(drv8305_t *dev, drv8305_status_02_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_STATUS_02_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_status_03_register(drv8305_t *dev, drv8305_status_03_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_STATUS_03_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_status_04_register(drv8305_t *dev, drv8305_status_04_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_STATUS_04_REG_ADDR, (uint16_t*)value);
+}
