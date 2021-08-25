@@ -40,7 +40,7 @@ typedef struct drv8305_status_01_reg_t_
     uint8_t PVDD_OVFL      :1 ; // Bits 6
     uint8_t PVDD_UVFL      :1 ; // Bits 7
     uint8_t TEMP_FLAG4     :1 ; // Bits 8
-    uint8_t STATUS_01_RSV1 :1 ; // Bits 9
+    uint8_t STAT01_RSV     :1 ; // Bits 9
     uint8_t FAULT          :1 ; // Bits 10
 } __attribute__((packed, aligned(2))) drv8305_status_01_reg_t;
 
@@ -49,7 +49,7 @@ typedef struct drv8305_status_02_reg_t_
     uint8_t SNS_A_OCP      :1 ; // Bits 0,
     uint8_t SNS_B_OCP      :1 ; // Bits 1
     uint8_t SNS_C_OCP      :1 ; // Bits 2
-    uint8_t STATUS_02_RSV1 :2 ; // Bits 3:4
+    uint8_t STAT02_RSV     :2 ; // Bits 3:4
     uint8_t FETLC_VDS      :1 ; // Bits 5
     uint8_t FETHC_VDS      :1 ; // Bits 6
     uint8_t FETLB_VDS      :1 ; // Bits 7
@@ -63,11 +63,11 @@ typedef struct drv8305_status_03_reg_t_
     uint8_t VCPH_OVLO_ABS  :1 ; // Bits 0
     uint8_t VCPH_OVLO      :1 ; // Bits 1
     uint8_t VCPH_UVLO2     :1 ; // Bits 2
-    uint8_t STATUS_03_RSV1 :1 ; // Bits 3
+    uint8_t STAT03_RSV1    :1 ; // Bits 3
     uint8_t VCP_LSD_UVLO2  :1 ; // Bits 4
     uint8_t AVDD_UVLO      :1 ; // Bits 5
     uint8_t VREG_UV        :1 ; // Bits 6
-    uint8_t STATUS_03_RSV2 :1 ; // Bits 7
+    uint8_t STAT03_RSV2    :1 ; // Bits 7
     uint8_t OTSD           :1 ; // Bits 8
     uint8_t WD_FAULT       :1 ; // Bits 9
     uint8_t PVDD_UVLO2     :1 ; // Bits 10
@@ -89,7 +89,7 @@ typedef struct drv8305_status_05_reg_t_
     uint8_t IDRIVEP_HS     :4 ; // Bits 0:3
     uint8_t IDRIVEN_HS     :4 ; // Bits 3:7
     uint8_t TDRIVEN        :2 ; // Bits 8:9
-    uint8_t RSV2           :1 ; // Bits 10
+    uint8_t STAT05_RSV     :1 ; // Bits 10
 } __attribute__((packed)) drv8305_status_05_reg_t;
 
 typedef struct drv8305_status_06_reg_t_
@@ -97,7 +97,7 @@ typedef struct drv8305_status_06_reg_t_
     uint8_t IDRIVEP_LS     :4 ; // Bits 0:3
     uint8_t IDRIVEN_LS     :4 ; // Bits 3:7
     uint8_t TDRIVEP        :2 ; // Bits 8:9
-    uint8_t RSV3           :1 ; // Bits 10
+    uint8_t STAT06_RSV     :1 ; // Bits 10
 } __attribute__((packed)) drv8305_status_06_reg_t;
 
 typedef struct drv8305_status_07_reg_t_
@@ -107,12 +107,12 @@ typedef struct drv8305_status_07_reg_t_
     uint8_t DEAD_TIME      :3 ; // Bits 4:6
     uint8_t PWM_MODE       :2 ; // Bits 7:8
     uint8_t COMM_OPTION    :1 ; // Bits 9
-    uint8_t RSV4           :1 ; // Bits 10
+    uint8_t STAT07_RSV     :1 ; // Bits 10
 } __attribute__((packed)) drv8305_status_07_reg_t;
 
 typedef struct drv8305_status_08_reg_t_
 {
-    uint16_t RSV5          :11 ; // Bits 0:10
+    uint16_t STAT08_RSV    :11 ; // Bits 0:10
 } __attribute__((packed)) drv8305_status_08_reg_t;
 
 typedef struct drv8305_status_09_reg_t_
@@ -146,16 +146,16 @@ typedef struct drv8305_status_11_reg_t_
     uint8_t VREG_UV_LEVEL  :2 ; // Bits 0:1
     uint8_t DIS_VREG_PWRGD :1 ; // Bits 2
     uint8_t SLEEP_DLY      :2 ; // Bits 3:4
-    uint8_t RSV6           :3 ; // Bits 5:7
+    uint8_t STAT11_RSV1    :3 ; // Bits 5:7
     uint8_t VREF_SCALE     :2 ; // Bits 8:9
-    uint8_t RSV7           :1 ; // Bits 10
+    uint8_t STAT11_RSV2    :1 ; // Bits 10
 } __attribute__((packed)) drv8305_status_11_reg_t;
 
 typedef struct drv8305_status_12_reg_t_
 {
     uint8_t VDS_MODE      :3 ; // Bits 0:2
     uint8_t VDS_LEVEL     :5 ; // Bits 3:7
-    uint8_t RSV8          :3 ; // Bits 8:10
+    uint8_t STAT12_RSV    :3 ; // Bits 8:10
 
 } __attribute__((packed)) drv8305_status_12_reg_t;
 
