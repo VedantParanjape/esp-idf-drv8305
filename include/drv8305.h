@@ -42,7 +42,7 @@ typedef struct drv8305_status_01_reg_t_
     uint8_t TEMP_FLAG4     :1 ; // Bits 8
     uint8_t STATUS_01_RSV1 :1 ; // Bits 9
     uint8_t FAULT          :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_01_reg_t;
+} __attribute__((packed, aligned(2))) drv8305_status_01_reg_t;
 
 typedef struct drv8305_status_02_reg_t_
 {
@@ -56,7 +56,7 @@ typedef struct drv8305_status_02_reg_t_
     uint8_t FETHB_VDS      :1 ; // Bits 8
     uint8_t FETLA_VDS      :1 ; // Bits 9
     uint8_t FETHA_VDS      :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_02_reg_t;
+} __attribute__((packed, aligned(2))) drv8305_status_02_reg_t;
 
 typedef struct drv8305_status_03_reg_t_
 {
@@ -71,7 +71,7 @@ typedef struct drv8305_status_03_reg_t_
     uint8_t OTSD           :1 ; // Bits 8
     uint8_t WD_FAULT       :1 ; // Bits 9
     uint8_t PVDD_UVLO2     :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_03_reg_t;
+} __attribute__((packed, aligned(2))) drv8305_status_03_reg_t;
 
 typedef struct drv8305_status_04_reg_t_
 {
@@ -82,7 +82,7 @@ typedef struct drv8305_status_04_reg_t_
     uint8_t FETHB_VGS        :1 ; // Bits 8
     uint8_t FETLA_VGS        :1 ; // Bits 9
     uint8_t FETHA_VGS        :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_04_reg_t;
+} __attribute__((packed, aligned(2))) drv8305_status_04_reg_t;
 
 esp_err_t drv8305_init(drv8305_t *dev);
 esp_err_t drv8305_write_register(drv8305_t *dev, uint8_t register_address, uint16_t value);
