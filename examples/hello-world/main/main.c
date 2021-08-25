@@ -28,7 +28,7 @@ void app_main()
 
     uint16_t val = 0;
     
-    drv8305_status_01_reg_t *temp = malloc(sizeof(drv8305_status_01_reg_t));
+    drv8305_status_01_reg_t temp;
 
     // temp->OTW = 1;
     // temp->TEMP_FLAG3 = 1;
@@ -50,22 +50,20 @@ void app_main()
     //      11    4   0
     //     bit   bit bit
 
-    drv8305_read_register(&dev, 0x01, &val);
-    temp = (drv8305_status_01_reg_t*)&val;
+    drv8305_read_status_01_register(&dev, &temp);
+    ESP_LOGI(TAG, "%x", *(uint16_t*)&temp);
 
-    ESP_LOGI(TAG, "%x", *(uint16_t*)temp);
-
-    ESP_LOGI(TAG, "%d", temp->OTW);
-    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG3);
-    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG2);
-    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG1);
-    ESP_LOGI(TAG, "%d", temp->VCPH_UVFL);
-    ESP_LOGI(TAG, "%d", temp->VDS_STATUS);
-    ESP_LOGI(TAG, "%d", temp->PVDD_OVFL);
-    ESP_LOGI(TAG, "%d", temp->PVDD_UVFL);
-    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG4);
-    ESP_LOGI(TAG, "%d", temp->STATUS_01_RSV1);
-    ESP_LOGI(TAG, "%d", temp->FAULT);
+    ESP_LOGI(TAG, "%d", temp.OTW);
+    ESP_LOGI(TAG, "%d", temp.TEMP_FLAG3);
+    ESP_LOGI(TAG, "%d", temp.TEMP_FLAG2);
+    ESP_LOGI(TAG, "%d", temp.TEMP_FLAG1);
+    ESP_LOGI(TAG, "%d", temp.VCPH_UVFL);
+    ESP_LOGI(TAG, "%d", temp.VDS_STATUS);
+    ESP_LOGI(TAG, "%d", temp.PVDD_OVFL);
+    ESP_LOGI(TAG, "%d", temp.PVDD_UVFL);
+    ESP_LOGI(TAG, "%d", temp.TEMP_FLAG4);
+    ESP_LOGI(TAG, "%d", temp.STATUS_01_RSV1);
+    ESP_LOGI(TAG, "%d", temp.FAULT);
 
     for (uint8_t i = 0x01; i <= 0xC; i++)
     {
