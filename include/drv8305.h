@@ -102,7 +102,7 @@ typedef struct drv8305_status_06_reg_t_
 
 typedef struct drv8305_status_08_reg_t_
 {
-    uint8_t RSV5          :11 ; // Bits 0:10
+    uint16_t RSV5          :11 ; // Bits 0:10
 } __attribute__((packed)) drv8305_status_08_reg_t;
 
 typedef struct drv8305_status_10_reg_t_
