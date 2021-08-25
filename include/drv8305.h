@@ -75,14 +75,55 @@ typedef struct drv8305_status_03_reg_t_
 
 typedef struct drv8305_status_04_reg_t_
 {
-    uint8_t STAT04_RSV1      :5 ; // Bits 0:4
-    uint8_t FETLC_VGS        :1 ; // Bits 5
-    uint8_t FETHC_VGS        :1 ; // Bits 6
-    uint8_t FETLB_VGS        :1 ; // Bits 7
-    uint8_t FETHB_VGS        :1 ; // Bits 8
-    uint8_t FETLA_VGS        :1 ; // Bits 9
-    uint8_t FETHA_VGS        :1 ; // Bits 10
-} __attribute__((packed, aligned(2))) drv8305_status_04_reg_t;
+    uint8_t STAT04_RSV1    :5 ; // Bits 0:4
+    uint8_t FETLC_VGS      :1 ; // Bits 5
+    uint8_t FETHC_VGS      :1 ; // Bits 6
+    uint8_t FETLB_VGS      :1 ; // Bits 7
+    uint8_t FETHB_VGS      :1 ; // Bits 8
+    uint8_t FETLA_VGS      :1 ; // Bits 9
+    uint8_t FETHA_VGS      :1 ; // Bits 10
+} __attribute__((packed)) drv8305_status_04_reg_t;
+
+typedef struct drv8305_status_05_reg_t_
+{
+    uint8_t IDRIVEP_HS     :4 ; // Bits 0:3
+    uint8_t IDRIVEN_HS     :4 ; // Bits 3:7
+    uint8_t TDRIVEN        :2 ; // Bits 8:9
+    uint8_t RSV2           :1 ; // Bits 10
+} __attribute__((packed)) drv8305_status_05_reg_t;
+
+typedef struct drv8305_status_06_reg_t_
+{
+    uint8_t IDRIVEP_LS     :4 ; // Bits 0:3
+    uint8_t IDRIVEN_LS     :4 ; // Bits 3:7
+    uint8_t TDRIVEP        :2 ; // Bits 8:9
+    uint8_t RSV3           :1 ; // Bits 10
+} __attribute__((packed)) drv8305_status_06_reg_t;
+
+typedef struct drv8305_status_08_reg_t_
+{
+    uint8_t RSV5          :11 ; // Bits 0:10
+} __attribute__((packed)) drv8305_status_08_reg_t;
+
+typedef struct drv8305_status_10_reg_t_
+{
+    uint8_t GAIN_CS1      :2 ; // Bits 0:1
+    uint8_t GAIN_CS2      :2 ; // Bits 2:3
+    uint8_t GAIN_CS3      :2 ; // Bits 4:5
+    uint8_t CS_BLANK      :2 ; // Bits 6:7
+    uint8_t DC_CAL_CH1    :1 ; // Bits 8
+    uint8_t DC_CAL_CH2    :1 ; // Bits 9
+    uint8_t DC_CAL_CH3    :1 ; // Bits 10
+
+} __attribute__((packed)) drv8305_status_10_reg_t;
+
+typedef struct drv8305_status_12_reg_t_
+{
+    uint8_t VDS_MODE      :3 ; // Bits 0:2
+    uint8_t VDS_LEVEL     :5 ; // Bits 3:7
+    uint8_t RSV8          :3 ; // Bits 8:10
+
+} __attribute__((packed)) drv8305_status_12_reg_t;
 
 esp_err_t drv8305_init(drv8305_t *dev);
 esp_err_t drv8305_write_register(drv8305_t *dev, uint8_t register_address, uint16_t value);
