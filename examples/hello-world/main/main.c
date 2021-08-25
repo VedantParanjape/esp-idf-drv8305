@@ -27,6 +27,30 @@ void app_main()
     ESP_ERROR_CHECK(drv8305_init(&dev));
 
     uint16_t val;
+    
+    drv8305_status_01_reg_t *temp = malloc(sizeof(drv8305_status_01_reg_t));
+
+    // 00000 0000010000
+    //      11    4   0
+    //     bit   bit bit
+
+    drv8305_read_register(&dev, 0x01, &val);
+    temp = (drv8305_status_01_reg_t*)&val;
+
+    ESP_LOGI(TAG, "%x", *(uint16_t*)temp);
+
+    ESP_LOGI(TAG, "%d", temp->OTW);
+    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG3);
+    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG2);
+    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG1);
+    ESP_LOGI(TAG, "%d", temp->VCPH_UVFL);
+    ESP_LOGI(TAG, "%d", temp->VDS_STATUS);
+    ESP_LOGI(TAG, "%d", temp->PVDD_OVFL);
+    ESP_LOGI(TAG, "%d", temp->PVDD_UVFL);
+    ESP_LOGI(TAG, "%d", temp->TEMP_FLAG4);
+    ESP_LOGI(TAG, "%d", temp->STATUS_01_RSV1);
+    ESP_LOGI(TAG, "%d", temp->FAULT);
+
 
     for (uint8_t i = 0x01; i <= 0xC; i++)
     {
