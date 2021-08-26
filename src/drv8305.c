@@ -4,6 +4,8 @@ static const char* drv_TAG = "drv8305";
 
 esp_err_t drv8305_init(drv8305_t *dev)
 {
+    CHECK_ARG(dev);
+
     spi_bus_config_t cfg = {
         .mosi_io_num = dev->DRV_MOSI_SDI_pin,
         .miso_io_num = dev->DRV_MISO_SDO_pin,
