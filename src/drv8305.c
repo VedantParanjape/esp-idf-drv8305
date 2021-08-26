@@ -119,3 +119,73 @@ esp_err_t drv8305_read_status_04_register(drv8305_t *dev, drv8305_status_04_reg_
 {
     return drv8305_read_register(dev, DRV8305_STATUS_04_REG_ADDR, (uint16_t*)value);
 }
+
+esp_err_t drv8305_read_control_05_register(drv8305_t *dev, drv8305_control_05_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_05_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_06_register(drv8305_t *dev, drv8305_control_06_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_06_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_07_register(drv8305_t *dev, drv8305_control_07_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_07_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_09_register(drv8305_t *dev, drv8305_control_09_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_09_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_0A_register(drv8305_t *dev, drv8305_control_0A_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_0A_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_0B_register(drv8305_t *dev, drv8305_control_0B_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_0B_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_read_control_0C_register(drv8305_t *dev, drv8305_control_0C_reg_t *value)
+{
+    return drv8305_read_register(dev, DRV8305_CONTROL_0C_REG_ADDR, (uint16_t*)value);
+}
+
+esp_err_t drv8305_write_control_05_register(drv8305_t *dev, drv8305_control_05_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_05_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_06_register(drv8305_t *dev, drv8305_control_06_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_06_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_07_register(drv8305_t *dev, drv8305_control_07_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_07_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_09_register(drv8305_t *dev, drv8305_control_09_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_09_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_0A_register(drv8305_t *dev, drv8305_control_0A_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_0A_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_0B_register(drv8305_t *dev, drv8305_control_0B_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_0B_REG_ADDR, *((uint16_t*)&value));
+}
+
+esp_err_t drv8305_write_control_0C_register(drv8305_t *dev, drv8305_control_0C_reg_t value)
+{
+    return drv8305_write_register(dev, DRV8305_CONTROL_0C_REG_ADDR, *((uint16_t*)&value));
+}

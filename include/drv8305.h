@@ -18,6 +18,13 @@
 #define DRV8305_STATUS_02_REG_ADDR 0x02
 #define DRV8305_STATUS_03_REG_ADDR 0x03
 #define DRV8305_STATUS_04_REG_ADDR 0x04
+#define DRV8305_CONTROL_05_REG_ADDR 0x05
+#define DRV8305_CONTROL_06_REG_ADDR 0x06
+#define DRV8305_CONTROL_07_REG_ADDR 0x07
+#define DRV8305_CONTROL_09_REG_ADDR 0x09
+#define DRV8305_CONTROL_0A_REG_ADDR 0x0A
+#define DRV8305_CONTROL_0B_REG_ADDR 0x0B
+#define DRV8305_CONTROL_0C_REG_ADDR 0x0C
 
 // struct which holds data for SPI driver
 typedef struct drv8305_t_ {
@@ -45,7 +52,7 @@ typedef struct drv8305_status_01_reg_t_
     uint8_t PVDD_OVFL      :1 ; // Bits 6
     uint8_t PVDD_UVFL      :1 ; // Bits 7
     uint8_t TEMP_FLAG4     :1 ; // Bits 8
-    uint8_t STAT01_RSV     :1 ; // Bits 9
+    uint8_t STAT01_RSV1    :1 ; // Bits 9
     uint8_t FAULT          :1 ; // Bits 10
 } __attribute__((packed, aligned(2))) drv8305_status_01_reg_t;
 
@@ -54,7 +61,7 @@ typedef struct drv8305_status_02_reg_t_
     uint8_t SNS_A_OCP      :1 ; // Bits 0,
     uint8_t SNS_B_OCP      :1 ; // Bits 1
     uint8_t SNS_C_OCP      :1 ; // Bits 2
-    uint8_t STAT02_RSV     :2 ; // Bits 3:4
+    uint8_t STAT02_RSV1    :2 ; // Bits 3:4
     uint8_t FETLC_VDS      :1 ; // Bits 5
     uint8_t FETHC_VDS      :1 ; // Bits 6
     uint8_t FETLB_VDS      :1 ; // Bits 7
@@ -172,5 +179,21 @@ esp_err_t drv8305_read_status_01_register(drv8305_t *dev, drv8305_status_01_reg_
 esp_err_t drv8305_read_status_02_register(drv8305_t *dev, drv8305_status_02_reg_t *value);
 esp_err_t drv8305_read_status_03_register(drv8305_t *dev, drv8305_status_03_reg_t *value);
 esp_err_t drv8305_read_status_04_register(drv8305_t *dev, drv8305_status_04_reg_t *value);
+
+esp_err_t drv8305_read_control_05_register(drv8305_t *dev, drv8305_control_05_reg_t *value);
+esp_err_t drv8305_read_control_06_register(drv8305_t *dev, drv8305_control_06_reg_t *value);
+esp_err_t drv8305_read_control_07_register(drv8305_t *dev, drv8305_control_07_reg_t *value);
+esp_err_t drv8305_read_control_09_register(drv8305_t *dev, drv8305_control_09_reg_t *value);
+esp_err_t drv8305_read_control_0A_register(drv8305_t *dev, drv8305_control_0A_reg_t *value);
+esp_err_t drv8305_read_control_0B_register(drv8305_t *dev, drv8305_control_0B_reg_t *value);
+esp_err_t drv8305_read_control_0C_register(drv8305_t *dev, drv8305_control_0C_reg_t *value);
+
+esp_err_t drv8305_write_control_05_register(drv8305_t *dev, drv8305_control_05_reg_t value);
+esp_err_t drv8305_write_control_06_register(drv8305_t *dev, drv8305_control_06_reg_t value);
+esp_err_t drv8305_write_control_07_register(drv8305_t *dev, drv8305_control_07_reg_t value);
+esp_err_t drv8305_write_control_09_register(drv8305_t *dev, drv8305_control_09_reg_t value);
+esp_err_t drv8305_write_control_0A_register(drv8305_t *dev, drv8305_control_0A_reg_t value);
+esp_err_t drv8305_write_control_0B_register(drv8305_t *dev, drv8305_control_0B_reg_t value);
+esp_err_t drv8305_write_control_0C_register(drv8305_t *dev, drv8305_control_0C_reg_t value);
 
 #endif
