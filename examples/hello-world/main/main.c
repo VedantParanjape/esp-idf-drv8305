@@ -26,8 +26,6 @@ void app_main()
 
     ESP_ERROR_CHECK(drv8305_init(&dev));
 
-    uint16_t val = 0;
-    
     drv8305_status_01_reg_t temp;
 
     // temp->OTW = 1;
@@ -62,12 +60,21 @@ void app_main()
     ESP_LOGI(TAG, "%d", temp.PVDD_OVFL);
     ESP_LOGI(TAG, "%d", temp.PVDD_UVFL);
     ESP_LOGI(TAG, "%d", temp.TEMP_FLAG4);
-    ESP_LOGI(TAG, "%d", temp.STATUS_01_RSV1);
+    ESP_LOGI(TAG, "%d", temp.STAT01_RSV1);
     ESP_LOGI(TAG, "%d", temp.FAULT);
 
-    for (uint8_t i = 0x01; i <= 0xC; i++)
-    {
-        drv8305_read_register(&dev, i, &val);
-        ESP_LOGI(TAG, "value %x: %x", i, val);
-    }
+    drv8305_control_05_reg_t temp5_;
+    temp5_.IDRIVEP_HS = 0xA;
+    temp5_.IDRIVEN_HS = 0xB;
+    temp5_.TDRIVEN = 0x2;
+
+    drv8305_write_control_05_register(&dev, temp5_);
+    drv8305_control_05_reg_t temp5;
+    drv8305_read_control_05_register(&dev, &temp5);
+    ESP_LOGI(TAG, "value %x: %x", 0x5, *(uint16_t*)&temp5);
+
+    ESP_LOGI(TAG, "%x", temp5.IDRIVEP_HS);    
+    ESP_LOGI(TAG, "%x", temp5.IDRIVEN_HS);    
+    ESP_LOGI(TAG, "%x", temp5.TDRIVEN);    
+    ESP_LOGI(TAG, "%x", temp5.STAT05_RSV1);
 }
