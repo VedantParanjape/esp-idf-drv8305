@@ -82,7 +82,7 @@ typedef struct drv8305_status_04_reg_t_
     uint8_t FETHB_VGS      :1 ; // Bits 8
     uint8_t FETLA_VGS      :1 ; // Bits 9
     uint8_t FETHA_VGS      :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_04_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_status_04_reg_t;
 
 typedef struct drv8305_status_05_reg_t_
 {
@@ -90,7 +90,7 @@ typedef struct drv8305_status_05_reg_t_
     uint8_t IDRIVEN_HS     :4 ; // Bits 3:7
     uint8_t TDRIVEN        :2 ; // Bits 8:9
     uint8_t STAT05_RSV     :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_05_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_01_reg_t;
 
 typedef struct drv8305_status_06_reg_t_
 {
@@ -98,7 +98,7 @@ typedef struct drv8305_status_06_reg_t_
     uint8_t IDRIVEN_LS     :4 ; // Bits 3:7
     uint8_t TDRIVEP        :2 ; // Bits 8:9
     uint8_t STAT06_RSV     :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_06_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_02_reg_t;
 
 typedef struct drv8305_status_07_reg_t_
 {
@@ -108,12 +108,12 @@ typedef struct drv8305_status_07_reg_t_
     uint8_t PWM_MODE       :2 ; // Bits 7:8
     uint8_t COMM_OPTION    :1 ; // Bits 9
     uint8_t STAT07_RSV     :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_07_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_03_reg_t;
 
 typedef struct drv8305_status_08_reg_t_
 {
     uint16_t STAT08_RSV    :11 ; // Bits 0:10
-} __attribute__((packed)) drv8305_status_08_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_reserved_reg_t;
 
 typedef struct drv8305_status_09_reg_t_
 {
@@ -127,7 +127,7 @@ typedef struct drv8305_status_09_reg_t_
     uint8_t DIS_GDRV_FAULT :1 ; // Bits 8
     uint8_t DIS_PVDD_UVLO2 :1 ; // Bits 9
     uint8_t FLIP_OTSD      :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_09_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_04_reg_t;
 
 typedef struct drv8305_status_10_reg_t_
 {
@@ -139,7 +139,7 @@ typedef struct drv8305_status_10_reg_t_
     uint8_t DC_CAL_CH2    :1 ; // Bits 9
     uint8_t DC_CAL_CH3    :1 ; // Bits 10
 
-} __attribute__((packed)) drv8305_status_10_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_05_reg_t;
 
 typedef struct drv8305_status_11_reg_t_
 {
@@ -149,7 +149,7 @@ typedef struct drv8305_status_11_reg_t_
     uint8_t STAT11_RSV1    :3 ; // Bits 5:7
     uint8_t VREF_SCALE     :2 ; // Bits 8:9
     uint8_t STAT11_RSV2    :1 ; // Bits 10
-} __attribute__((packed)) drv8305_status_11_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_06_reg_t;
 
 typedef struct drv8305_status_12_reg_t_
 {
@@ -157,7 +157,7 @@ typedef struct drv8305_status_12_reg_t_
     uint8_t VDS_LEVEL     :5 ; // Bits 3:7
     uint8_t STAT12_RSV    :3 ; // Bits 8:10
 
-} __attribute__((packed)) drv8305_status_12_reg_t;
+} __attribute__((packed,aligned(2))) drv8305_control_07_reg_t;
 
 esp_err_t drv8305_init(drv8305_t *dev);
 esp_err_t drv8305_write_register(drv8305_t *dev, uint8_t register_address, uint16_t value);
